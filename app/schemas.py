@@ -40,3 +40,6 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+class LoginUser(UserCreate):
+    pass
