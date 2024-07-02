@@ -1,12 +1,7 @@
-from fastapi import FastAPI, HTTPException, status, Depends
-import psycopg2
-from typing import Optional,List
-from pydantic import BaseModel
-from sqlalchemy.orm import Session
-from psycopg2.extras import RealDictCursor
+from fastapi import FastAPI
 
-from .database import engine,get_db
-from . import models,schemas,utils
+from .database import engine
+from . import models
 from .router import users,posts,auth
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
@@ -15,17 +10,5 @@ app.include_router(users.usersRouter)
 app.include_router(posts.postsRouter)
 app.include_router(auth.authrouter)
 
-
-# try:
-#     conn = psycopg2.connect(host='localhost', database='fastapi',
-#                             user='postgres', password='root4321', cursor_factory=RealDictCursor)
-
-#     cursor = conn.cursor()
-#     print("Database connection was successfull.")
-# except Exception as error:
-#     print(error)
-
-
- 
 
 

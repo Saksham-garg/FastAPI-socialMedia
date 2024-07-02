@@ -8,7 +8,7 @@ usersRouter = APIRouter(
     tags=['Users']
 )
 
-@usersRouter.post('/users',status_code=status.HTTP_201_CREATED,response_model=schemas.UserOut)
+@usersRouter.post('/',status_code=status.HTTP_201_CREATED,response_model=schemas.UserOut)
 def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
     try:
         user.password = utils.hash_password(user.password)
@@ -29,7 +29,7 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
 
 
 
-@usersRouter.get('/users/{id}',response_model=schemas.UserOut)
+@usersRouter.get('/{id}',response_model=schemas.UserOut)
 async def get_user(id: int,db: Session = Depends(get_db)):
 
     user = db.query(models.User).filter(models.User.id == id).first()
